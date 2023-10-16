@@ -84,3 +84,74 @@ h1::before{
     color: #79AC78;
     font-size: 18px;
 }
+.input-container form .checkbox{
+    display: inline-flex;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+.input-container form .checkbox p{
+    margin-left: 8px;
+}
+.input-container form .forgot_password_box {
+    width: 100%;
+    text-align: right;
+    margin-top: 20px;
+
+}
+.input-container form .forgot_password_box .forgot_password a{
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #79AC78;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.input-container  .login_button{
+    width: 100%;
+    background-color: #79AC78;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 16px;
+    margin-top: 30px;
+    border-radius: 100px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.input-container form .login_button:active{
+    transform: scale(0.9);
+}
+.input-container form .link_box{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.input-container form .link_box .signup_link,
+.input-containerox form .link_box .link,
+.input-container form .link_box .contact_link{
+    font-size: 16px;
+    margin-top: 10px;
+}
+.input-container form .link_box .signup_link a,
+.input-container form .link_box .link a,
+.input-container form .link_box .contact_link a{
+    text-decoration: none;
+    color: #79AC78;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.input-container form .link_box .signup_link a:hover,
+.input-container form .link_box .link a:hover,
+.input-container form .link_box .contact_link a:hover,
+.input-container form .forgot_password_box .forgot_password a:hover{
+    text-decoration: underline;
+}
+
+.attribute{
+    position: absolute;
+    bottom: 10px;
+}

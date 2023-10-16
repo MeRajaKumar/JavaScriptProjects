@@ -85,3 +85,8 @@ table td{
     font-family: monospace;
     font-size: 35px;
 }
+.attribute{
+    position: absolute;
+    bottom: 10px;
+    color: #EEEEEE;
+}
