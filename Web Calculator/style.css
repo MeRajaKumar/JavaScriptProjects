@@ -64,6 +64,7 @@ table td{
     background: #787A91;
     font-size: 25px;
     color: #fff;
+    transform: translate(1px);
 }
 .operator:hover{
     color:black;
