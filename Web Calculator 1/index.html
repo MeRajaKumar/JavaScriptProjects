@@ -6,6 +6,20 @@
      <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
      <link rel="stylesheet" href="style.css">
      <title>Web calculator</title>
+     <script>
+          function writeText(ele){
+              var txt = document.getElementById("txt");
+              if(ele.id=="del" || ele.id=="c"){
+                      txt.value="";
+              }else{
+                  txt.value+=ele.innerHTML;
+              }
+          }
+            function calculate(){
+                 var box = document.getElementById("txt");
+                 box.value = eval(box.value);
+            }
+      </script>
 </head>
 <body>
      <div class="textDiv">
@@ -13,25 +27,25 @@
           <p>Design by <a href="#">Aayush Gupta</a></p>
      </div>
      <div class="calContainer">
-          <input type="inputTxt" class="inputBox">
-          <button type="del" class="btnfamily operator"><i class="ri-delete-bin-3-line"></i></button>
-          <button type="calDel" class="btnfamily operator"><i class="ri-delete-back-2-line"></i></button>
-          <button type="devide" class="btnfamily operator">/</button>
-          <button type="multi" class="btnfamily operator">*</button>
-          <button type="seven" class="btnfamily">7</button>
-          <button type="eight" class="btnfamily">8</button>
-          <button type="nine" class="btnfamily">9</button>
-          <button type="minus" class="btnfamily operator">-</button>
-          <button type="four" class="btnfamily">4</button>
-          <button type="five" class="btnfamily">5</button>
-          <button type="six" class="btnfamily">6</button>
-          <button type="add" class="btnfamily operator">+</button>
-          <button type="one" class="btnfamily">1</button>
-          <button type="two" class="btnfamily">2</button>
-          <button type="three" class="btnfamily">3</button>
-          <button type="dot" class="btnfamily operator">.</button>
-          <button type="zero" class="btnfamily">0</button>
-          <button type="equal" class="btnfamily operator">=</button>
+          <input type="inputTxt" id="txt" class="inputBox">
+          <button type="del" class="btnfamily operator" onclick="writeText(this)"><i id="del" class="ri-delete-bin-3-line"></i></button>
+          <button type="calDel" class="btnfamily operator" onclick="writeText(this)"><i id="c" class="ri-delete-back-2-line"></i></button>
+          <button type="devide" class="btnfamily operator" onclick="writeText(this)">/</button>
+          <button type="multi" class="btnfamily operator" onclick="writeText(this)">*</button>
+          <button type="seven" class="btnfamily" onclick="writeText(this)">7</button>
+          <button type="eight" class="btnfamily" onclick="writeText(this)">8</button>
+          <button type="nine" class="btnfamily" onclick="writeText(this)">9</button>
+          <button type="minus" class="btnfamily operator" onclick="writeText(this)">-</button>
+          <button type="four" class="btnfamily" onclick="writeText(this)">4</button>
+          <button type="five" class="btnfamily" onclick="writeText(this)">5</button>
+          <button type="six" class="btnfamily" onclick="writeText(this)">6</button>
+          <button type="add" class="btnfamily operator" onclick="writeText(this)">+</button>
+          <button type="one" class="btnfamily" onclick="writeText(this)">1</button>
+          <button type="two" class="btnfamily" onclick="writeText(this)">2</button>
+          <button type="three" class="btnfamily" onclick="writeText(this)">3</button>
+          <button type="dot" class="btnfamily operator" onclick="writeText(this)">.</button>
+          <button type="zero" class="btnfamily" onclick="writeText(this)">0</button>
+          <button type="equal" class="btnfamily operator" onclick="calculate()">=</button>
      </div>
      <!-- Script link  -->
      <script src="script.js"></script>
