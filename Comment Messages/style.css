@@ -1,0 +1,78 @@
+
+
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body{
+     height: 100vh;
+     width: 100%;
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     background-image: linear-gradient(#14274E,#394867);
+}
+.commentInput{
+     background-color: #14274E;
+     height: 60vh;
+     width: 40%;
+     border-radius: 11px;    
+     padding: 50px 45px;
+}
+.commentInput fieldset{
+     margin: 15px;
+     font-size: 1.5rem;
+     color: #F1F6F9;
+     border: none;
+}
+.commentInput input{
+     width: 350px;
+     height: 42px;
+     outline: none;
+     padding: 0px 6px;
+     font-size: 1.1rem;
+     border-radius: 8px;
+     border: none;
+     color: #F1F6F9;
+     background-color: #394867;
+}
+.commentInput input::placeholder,textarea::placeholder{
+     font-size: 1.1rem;
+     color: #9BA4B4;
+}
+.commentInput textarea{
+     outline: none;
+     padding: 5px 6px;
+     font-size: 1.1rem;
+     border-radius: 8px;
+     border: none;
+     color: #F1F6F9;
+     background-color: #394867;
+}
+.btns button{
+     padding: 5px 18px;
+     background-color: #F1F6F9;
+     color: #14274E;
+     margin: 0px 5px;
+     font-size: 1.3rem;
+     border: none;
+     border-radius: 12px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: all 0.2s ease-in;
+}
+.btns button i {
+     margin-right:3px;
+}
+.btns{
+     margin-left: 60px;
+     margin-bottom: 45px;
+}
+.commentSection{
+     background-color: #14274E;
+     height: 80vh;
+     width: 40%;
+     border-radius: 11px;    
+}

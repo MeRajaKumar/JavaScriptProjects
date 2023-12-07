@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.6.0/fonts/remixicon.css" rel="stylesheet">
+     <link rel="stylesheet" href="style.css">
+     <title>Comments Section</title>
+     <script>
+          var nameTxt = document.getElementsById(name);
+          var commentTxt = document.getElementsById(comment);
+          function clear(){
+               alert("Please clear");
+               nameTxt.innerHTML = "";
+               commentTxt.innerHTML = "";
+          }
+     </script>
+</head>
+<body>
+     <div class="commentInput">
+          <fieldset>
+               <legend>Name</legend>
+               <input type="text" id="name" placeholder="Type your name..">
+          </fieldset>
+          <fieldset>
+               <legend>Comment</legend>
+               <textarea name="" id="comment" cols="36" rows="4" placeholder="Type your Comments.."></textarea>
+          </fieldset>
+          <div class="btns">
+               <button type="button" onclick="send()"><i class="ri-send-plane-fill"></i>Send</button>
+               <button type="button" onclick="clear()"><i class="ri-close-circle-line"></i>Clear</button>
+          </div>
+     </div>
+     <div class="commentSection">
+
+     </div>
+     
+     <script src="script.js"></script>
+     
+</body>
+</html>
