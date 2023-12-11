@@ -6,21 +6,21 @@ const calculateTemp = ()=>{
      const valueTemp = temp_diff.options[tempSelected.selectedIndex].value;
 
      const celToFah=(cel)=>{
-          let fahrenheit = math.round((cel * 9/5)+32);
+          let fahrenheit = Math.round((cel * 9/5)+32);
           return fahrenheit;
      }
 
      const fehTocel=(fehr)=>{
-          let celsius = math.round((fehr - 32)*5/9);
+          let celsius = Math.round((fehr - 32)*5/9);
           return celsius;
      }
      let result;
 
-     if (valurTemp == 'cel'){
-          result = celToFah(numberTemp);
+     if (valueTemp == 'cel'){
+          result = celToFah(numberTemp);               //problem is here**
           document.getElementById('resultContainer').innerHTML = '= ${result}*Fahrenheit';
      }else{
-          result = fehToCel(numberTemp);
+          result = fehTocel(numberTemp);
           document.getElementById('resultContainer').innerHTML = '= ${result}*celsius';
      }
 }

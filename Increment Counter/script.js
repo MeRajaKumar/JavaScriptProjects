@@ -10,7 +10,7 @@ counters.forEach((counter)=>{
           const startingCount = Number(counter.innerHTML);
           const incr = targetCount / 100;
           if(startingCount < targetCount){
-               counter.innerHTML='${Math.round(startingCount + incr)}';
+               counter.innerHTML='${Math.round(startingCount + incr)}';  //problem is in this line??**
                setTimeout(updateCounter,10)
           }else{
                counter.innerHTML=targetCount;
