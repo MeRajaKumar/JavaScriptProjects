@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="style.css">
+     <title>SIP Calculator</title>
+</head>
+<body>
+     <div class="mainContainer">
+          <div>
+               <h2>Calculate Your SIP Here?</h2>
+               <div class="divIteams one">
+                    <div>
+                         <label for="monthlyInv">Monthly Investment</label><input type="text" name="monthlyInv" id="monthly-investment">
+                    </div>
+                    <input type="range" name="monthlyInv" id="">
+               </div>
+               <div class="divIteams two">
+                    <div>
+                         <label for="returnRate">Expect Return Rate (p.a)</label><input type="text" name="returnRate" id="return-rate">
+                    </div>
+                    <input type="range" name="returnRate" id="">
+               </div>
+               <div class="divIteams three">
+                    <div>
+                         <label for="timePeriod">Time Period</label><input type="text" name="timePeriod" id="time-period">
+                    </div>
+                    <input type="range" name="timePeriod" id="">
+               </div>
+          </div>
+          <div>
+               <h2>Your Result!</h2>
+               <div class="returnDiv">
+                    <div>
+                         <div>
+                              <p>Invested Amount</p><span></span>
+                         </div>
+                         <div>
+                              <p>Est. Retrun</p><span></span>
+                         </div>
+                         <div>
+                              <p>Total Value</p><span></span>
+                         </div>
+                    </div>
+                    <div>
+                         <div class="resultCircle"></div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <script src="script.js"></script>
+</body>
+</html>
