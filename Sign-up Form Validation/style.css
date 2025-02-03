@@ -1,62 +1,92 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+*{
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    width: 100%;
+    padding: 0px 50px;
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.container {
+body h2{
+    font-size: 70px;
+    width: 400px;
+}
+.container{
     background: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 17px 50px;
+    border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 320px;
+    width: 32%;
+    height: 78vh;
+}
+.container h2{
     text-align: center;
-    
+    padding-top: 14px;
+    font-size: 27px;
 }
-h2 {
-    color: #333;
+.sign-up{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.form-group {
-    text-align: left;
-    margin-bottom: 10px;
-    width: 100%;
-    background-color: #28a745;
+.sign-up .social-icons{
+    margin: 10px;
 }
-label {
-    font-weight: bold;
-}
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
+.social-icons a{
     border: 1px solid #ccc;
-    border-radius: 5px;
-    display: block;
-    overflow: hidden;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+    color: #000;
+    text-decoration: none;
 }
-select{
-    width: 320px;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: block;
+.sign-up span{
+    margin: 5px;
 }
-button {
-    width: 100%;
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
+.sign-up input{
+    background-color: #eee;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    
+    margin: 8px 0px;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
 }
-button:hover {
-    background-color: #218838;
+.sign-up select{
+    background-color: #eee;
+    border: none;
+    margin: 8px 0px;
+    padding: 10px 8px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 361px;
+    outline: none;
+}
+.sign-up select::option{
+    /* margin-right: 10px; */
+}
+.sign-up button{
+    background-color: #512da8;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
 }
