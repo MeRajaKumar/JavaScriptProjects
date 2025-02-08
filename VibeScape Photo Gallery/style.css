@@ -1,0 +1,14 @@
+:root{
+    --bcg-clr: #000101;
+    --element-clr:#2e2e2f;
+    --element-clr-2:#1a1b1b;
+    --txt-clr: #e5e5e4;
+    --txt-clr-2: #a0a0a0;
+    --hover-clr: #0068fe;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
