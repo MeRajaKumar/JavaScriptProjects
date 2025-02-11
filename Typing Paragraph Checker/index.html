@@ -1,0 +1,28 @@
+<!-- Que: a random paragraph should appear, a typing box should be like it should
+count the each words of the paragraph and display the time to complete that paragraph. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Paragraph Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Typing Paragraph Checker</h1>
+        <p id="paragraph">The quick brown fox jumps over the lazy dog.</p>
+        <textarea id="inputBox" placeholder="Start typing here..."></textarea>
+        <button class="btn" onclick="resetTest()">Reset</button>
+    </div>
+    
+    <!-- Modal Pop-up -->
+    <div id="resultModal" class="modal">
+        <h2>Typing Completed!</h2>
+        <p id="resultText"></p>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
