@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,35 @@
      <link rel="stylesheet" href="style.css">
      <title>Age Calculator</title>
 </head>
+
 <body>
+     <!-- Main Calculator -->
      <div class="main-con">
-          <h1>Calculate Your age!✌️ </h1>
+          <h1>Calculate Your Age ✌️</h1>
+
+          <!-- Input Section -->
           <div class="input-section">
-               <input type="date" name="date-of-birth" id="date-of-birth">
-               <input type="date" name="current-date" id="current-date">
+               <label for="date-of-birth">Date of Birth</label>
+               <input type="date" id="date-of-birth">
+
+               <label for="current-date">Current Date</label>
+               <input type="date" id="current-date">
+
+               <!-- Buttons -->
                <div class="button-div">
-                    <button type="button">Calculate</button>
-                    <button type="button">Reset</button>
+                    <button type="button" id="calc-btn">
+                         <i class="ri-calculator-line"></i> Calculate
+                    </button>
+                    <button type="button" id="reset-btn">
+                         <i class="ri-refresh-line"></i> Reset
+                    </button>
                </div>
+
+               <!-- Error / Success Message -->
+               <p id="error-msg"></p>
           </div>
+
+          <!-- Result Section -->
           <div class="result-section">
                <div class="wrappers-text">
                     <h2>00</h2>
@@ -31,11 +50,39 @@
                     <h2>00</h2>
                     <p>Days</p>
                </div>
+               <div class="wrappers-text">
+                    <h2>00</h2>
+                    <p>Hours</p>
+               </div>
+               <div class="wrappers-text">
+                    <h2>00</h2>
+                    <p>Minutes</p>
+               </div>
+               <div class="wrappers-text">
+                    <h2 id="next-bday">--</h2>
+                    <p>Days to Birthday</p>
+               </div>
+
           </div>
+
+
+          <!-- Icon -->
           <div class="disign-by-ag">
                <i class="ri-calendar-schedule-fill"></i>
           </div>
+
+          <button id="theme-toggle">
+               <i class="ri-moon-line"></i>
+          </button>
+
      </div>
-     
+
+     <!-- Footer -->
+     <footer class="footer-branding">
+          <p>© Developer Raja</p>
+     </footer>
+
+     <script src="script.js"></script>
 </body>
+
 </html>
