@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy Yaadein 😜</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fredoka+One&family=Poppins:wght@300;600;800&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
+    <style>
+        /* * ----------------------------------------
+        * Global Variables & Reset
+        * ----------------------------------------
+        */
+        :root {
+            --bg-gradient-start: #fbc2eb; /* From previous page */
+            --bg-gradient-end: #a6c1ee;   /* From previous page */
+            --main-text-color: #333;
+            --accent-color-1: #ff6b6b; /* Rose-red */
+            --accent-color-2: #ffd166; /* Sunny-yellow */
+            --accent-color-3: #a6c1ee; /* Sky-blue */
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: rgba(0, 0, 0, 0.15);
+            --button-color: #fff;
+            --font-main: 'Poppins', sans-serif;
+            --font-heading: 'Fredoka One', cursive;
+            --font-card: 'Caveat', cursive;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-card);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--main-text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+            padding: 50px 20px;
+        }
+        
+        /* * ----------------------------------------
+        * Advanced Background & Particles (Same as index.html)
+        * ----------------------------------------
+        */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 10% 20%, #ffefd5, transparent 50%),
+                        radial-gradient(circle at 90% 80%, #d1c1f5, transparent 50%);
+            transition: background 1s ease-in-out;
+        }
+
+        .background-animation::before,
+        .background-animation::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: moveGradient 20s infinite alternate ease-in-out;
+        }
+
+        .background-animation::before {
+            width: 250px;
+            height: 250px;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .background-animation::after {
+            width: 300px;
+            height: 300px;
+            bottom: 15%;
+            right: 20%;
+            animation-delay: 5s;
+        }
+
+        @keyframes moveGradient {
+            from { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            to { transform: translate(50px, -50px) scale(1.2); opacity: 0.6; }
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 25s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 25%; width: 50px; height: 50px; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 50%; left: 60%; width: 30px; height: 30px; animation-delay: 4s; }
+        .particle:nth-child(3) { bottom: 10%; left: 80%; width: 40px; height: 40px; animation-delay: 8s; }
+        .particle:nth-child(4) { top: 80%; left: 40%; width: 60px; height: 60px; animation-delay: 12s; }
+        .particle:nth-child(5) { top: 40%; left: 10%; width: 45px; height: 45px; animation-delay: 16s; }
+        .particle:nth-child(6) { bottom: 30%; left: 5%; width: 35px; height: 35px; animation-delay: 20s; }
+        .particle:nth-child(7) { top: 60%; right: 5%; width: 55px; height: 55px; animation-delay: 2s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-50px) rotate(180deg); opacity: 0.6; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+        }
+
+        /* * ----------------------------------------
+        * Floating Emojis
+        * ----------------------------------------
+        */
+        .floating-emoji {
+            position: fixed;
+            font-size: 3rem;
+            animation: float 20s infinite ease-in-out;
+            opacity: 0.7;
+            z-index: 1;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .floating-emoji:hover {
+            transform: scale(1.5) rotate(10deg);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-50px) rotate(15deg) scale(1.1); opacity: 0.9; }
+            100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+        }
+        
+        .emoji-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .emoji-2 { top: 30%; right: 15%; animation-delay: 3s; }
+        .emoji-3 { bottom: 20%; left: 25%; animation-delay: 6s; }
+        .emoji-4 { bottom: 10%; right: 5%; animation-delay: 9s; }
+        .emoji-5 { top: 60%; left: 45%; animation-delay: 4s; }
+        .emoji-6 { top: 80%; right: 30%; animation-delay: 12s; }
+
+        /* * ----------------------------------------
+        * Main Content Container
+        * ----------------------------------------
+        */
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .main-title {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            color: var(--accent-color-1);
+            text-shadow: 4px 4px 0px rgba(255, 255, 255, 0.5), 6px 6px 0px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            animation: textPopUp 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        @keyframes textPopUp {
+            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* * ----------------------------------------
+        * Memories Grid & Cards
+        * ----------------------------------------
+        */
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .memory-card {
+            background-color: var(--card-bg);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-15px) rotateX(5deg) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .memory-card p {
+            font-family: var(--font-card);
+            font-size: 2rem;
+            line-height: 1.4;
+            margin: 0;
+            color: #444;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        /* --- Individual Card Colors --- */
+        .memory-card:nth-child(2) { background: linear-gradient(135deg, #e1f5fe, #cfd8dc); }
+        .memory-card:nth-child(3) { background: linear-gradient(135deg, #fce4ec, #ffe0b2); }
+        .memory-card:nth-child(4) { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+        .memory-card:nth-child(5) { background: linear-gradient(135deg, #ffe0b2, #fff8e1); }
+        .memory-card:nth-child(6) { background: linear-gradient(135deg, #cfd8dc, #eceff1); }
+
+        /* * ----------------------------------------
+        * Interactive Buttons
+        * ----------------------------------------
+        */
+        .button-group {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .popup-btn, .next-btn {
+            font-family: var(--font-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: relative;
+            overflow: hidden;
+            color: var(--button-color);
+            text-decoration: none;
+        }
+        
+        .popup-btn {
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+        }
+
+        .next-btn {
+            background: linear-gradient(45deg, var(--accent-color-3), #5c81d1);
+            box-shadow: 0 8px 25px rgba(166, 193, 238, 0.4);
+        }
+
+        .popup-btn:hover, .next-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .next-btn:hover {
+             box-shadow: 0 12px 30px rgba(166, 193, 238, 0.6);
+        }
+
+        /* * ----------------------------------------
+        * Random Memory Pop-up
+        * ----------------------------------------
+        */
+        #popup-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            font-family: var(--font-card);
+            position: relative;
+            transform: scale(0.8);
+            animation: bounceIn 0.5s forwards;
+            max-width: 90%;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .modal-content p {
+            font-size: 2.5rem;
+            line-height: 1.5;
+            margin: 0;
+            color: #444;
+        }
+        
+        .modal-content .emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 1s infinite;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: #999;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-color-1);
+            transform: rotate(90deg);
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* * ----------------------------------------
+        * Responsive Design
+        * ----------------------------------------
+        */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .memory-card p { font-size: 1.5rem; }
+            .popup-btn, .next-btn { padding: 15px 25px; font-size: 1rem; }
+            .modal-content p { font-size: 1.8rem; }
+            .button-group { flex-direction: column; gap: 15px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="floating-emoji emoji-1">😂</div>
+    <div class="floating-emoji emoji-2">😝</div>
+    <div class="floating-emoji emoji-3">🤪</div>
+    <div class="floating-emoji emoji-4">😇</div>
+    <div class="floating-emoji emoji-5">😅</div>
+    <div class="floating-emoji emoji-6">🥳</div>
+
+    <div class="container">
+        <h1 class="main-title" data-aos="fade-down" data-aos-duration="1000">
+            Teri Har Nautanki Yaad Hai Mujhe 😜
+        </h1>
+
+        <div class="memories-grid">
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="200">
+                <p>“Tu pehle assignment maangta tha…<br>ab khud bana deta hai 🥹”</p>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="400">
+                <p>“Group study mein padhai kam,<br> memes zyada share karte the 😆”</p>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="600">
+                <p>“Aankhon hi aankhon mein<br>baatein samajh jaata tha tu! 😎”</p>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="800">
+                <p>“Tera ‘5 min’ ka wait,<br>1 ghante ka hota tha 🤡”</p>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="1000">
+                <p>“Call lagayi thi notes ke liye...<br>baat chalti gayi crush tak 😜”</p>
+            </div>
+            <div class="memory-card" data-aos="zoom-in" data-aos-delay="1200">
+                <p>“Yaad hai wo din jab humne<br>milke woh problem solve ki thi!🧠”</p>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="popup-btn" onclick="showRandomMemory()">Tap for a Random Memory! ✨</button>
+            <a href="gallery.html" class="next-btn">Next → Gallery 📸</a>
+        </div>
+    </div>
+
+    <div id="popup-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <span class="emoji">❤️</span>
+            <p id="random-memory-text"></p>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+    </script>
+
+    <script>
+        const randomMemories = [
+            { text: "Group project mein tu sirf ‘theek hai’ bolta tha, kaam humse karata tha! 😂", emoji: "😆" },
+            { text: "Yaad hai jab humari team cricket mein haar gayi thi, aur tu umpire se ladne laga tha! 🏏", emoji: "🤪" },
+            { text: "Ek baar main bimaar tha, aur tu hospital mein mere liye Biryani lekar aaya tha! 🥲", emoji: "🥹" },
+            { text: "वो तेरा 'last minute' ka plan, jo hamesha sabse best nikalta tha! 🤩", emoji: "🥳" },
+            { text: "Class bunk karke movie dekhne chale jaana, aur teacher ko ‘Tabiyat kharab hai’ bolna! 😉", emoji: "🤫" },
+            { text: "Yaad hai wo raat jab humne chaand ko dekh kar future plans discuss kiye the! 🌃", emoji: "💫" },
+        ];
+        
+        function showRandomMemory() {
+            const randomIndex = Math.floor(Math.random() * randomMemories.length);
+            const memory = randomMemories[randomIndex];
+            
+            document.getElementById('random-memory-text').innerHTML = memory.text;
+            document.querySelector('#popup-modal .emoji').innerHTML = memory.emoji;
+            document.getElementById('popup-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('popup-modal').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

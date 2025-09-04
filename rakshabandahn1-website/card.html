@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raksha Bandhan Photo Gallery</title>
+    <meta name="description" content="A curated gallery of beautiful sibling photos and heartfelt messages for Raksha Bandhan.">
+    <meta name="keywords" content="Rakhi gallery, photo gallery, siblings, memories, aesthetic, animation">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Poppins:wght@300;400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+</head>
+
+<body>
+    <style>
+        /* CSS Variables for a refined theme */
+        :root {
+            --primary-color: #0d1b2a;       /* Deep Sapphire */
+            --secondary-color: #1b263b;     /* Muted Blue-Grey */
+            --accent-color: #e0f2f1;        /* Soft Mint */
+            --gold-color: #ffd700;          /* Gold for accents */
+            --text-color: #ffffff;          /* White Text */
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --neon-glow: 0 0 8px var(--gold-color), 0 0 15px var(--gold-color);
+        }
+
+        /* Base and Global Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 1000px; /* For 3D transforms */
+        }
+
+        /* --- Animated Background Canvas (Starfield) --- */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        /* --- Intro Banner --- */
+        .intro-banner {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        .heading-glow {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--gold-color);
+            text-shadow: var(--neon-glow);
+            animation: fadeInDown 1s ease-out;
+        }
+        .subtext {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* --- Photo Gallery (Masonry Grid) --- */
+        .photo-gallery {
+            column-count: 3;
+            column-gap: 3rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 1200px) { .photo-gallery { column-count: 2; } }
+        @media (max-width: 768px) { .photo-gallery { column-count: 1; } }
+
+        .photo-card-wrapper {
+            break-inside: avoid-column;
+            margin-bottom: 3rem;
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .photo-card-wrapper.visible {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        /* --- Updated Photo Card Styles (Rectangular) --- */
+        .photo-card {
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-color);
+        }
+        
+        /* ---- Image-specific changes for square/rectangular images ---- */
+        .photo-image-container {
+            width: 100%;
+            padding-top: 100%; /* Creates a square aspect ratio (1:1) */
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px 15px 0 0;
+        }
+        .photo-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; /* Ensures image covers the container without distortion */
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .photo-card:hover .photo-image {
+            transform: scale(1.1);
+        }
+        /* ------------------------------------------------------------- */
+
+        .photo-content {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+        .photo-card:hover .photo-content {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid var(--gold-color);
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            box-shadow: 0 0 10px var(--gold-color), 0 0 20px var(--gold-color), 0 0 30px var(--gold-color);
+        }
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+
+        .photo-message {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+        .photo-signature {
+            font-family: 'Sacramento', cursive;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+        
+        /* --- Modal for Photo Customization --- */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+        }
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: modalPop 0.5s forwards;
+        }
+        .modal-photo-preview {
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .close-btn {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            font-size: 2rem;
+            color: var(--text-color);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .close-btn:hover { transform: rotate(90deg); }
+
+        /* --- Floating Elements --- */
+        .floating-element {
+            position: fixed;
+            width: 50px; height: auto;
+            animation: float 25s infinite ease-in-out;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        .rakhi { top: 10%; left: 15%; animation-duration: 25s; }
+        .sweets { bottom: 5%; left: 30%; animation-duration: 30s; animation-delay: 5s; }
+        .flower { top: 20%; right: 10%; animation-duration: 22s; animation-delay: 2s; }
+        
+        /* --- Animations --- */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(2vw, -2vh) rotate(5deg); } 100% { transform: translate(0, 0) rotate(0deg); } }
+        @keyframes modalPop { to { transform: scale(1); opacity: 1; } }
+    </style>
+
+    <main>
+        <canvas id="particle-canvas"></canvas>
+
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/041/924/172/small_2x/ai-generated-3d-style-colorful-flower-isolated-on-transparent-background-free-png.png" alt="Rakhi" class="floating-element rakhi" style="width: 60px;">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/041/924/172/small_2x/ai-generated-3d-style-colorful-flower-isolated-on-transparent-background-free-png.png" alt="Sweets" class="floating-element sweets">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/041/924/172/small_2x/ai-generated-3d-style-colorful-flower-isolated-on-transparent-background-free-png.png" alt="Flower" class="floating-element flower">
+
+        <section class="intro-banner">
+            <h1 class="heading-glow">Memories Photo Gallery</h1>
+            <p class="subtext">A collection of beautiful moments to cherish forever.</p>
+        </section>
+
+        <section class="photo-gallery" id="photo-gallery">
+            </section>
+    </main>
+
+    <div class="modal" id="photo-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <img class="modal-photo-preview" id="modal-photo-preview">
+        </div>
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Photo Data with specific image URLs ---
+            const photoData = [
+                {
+                    image: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1607896008i/56273276.jpg',
+                    message: "You’re not just my sibling, you’re my forever built-in best friend.",
+                    signature: "Your Loving Brother"
+                },
+                {
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS37Hxq6K2N43A94co0c8acHm3gopK4XFXg4g5_piJN7puFLBhHcY9xi5V0RtoUSNP2sYM&usqp=CAU',
+                    message: "A thread that ties memories, childhood fights and endless love.",
+                    signature: "Your Little Sister"
+                },
+                {
+                    image: 'https://res.cloudinary.com/jerrick/image/upload/c_scale,f_jpg,q_auto/645c99dd5de7f1001d9f9a92.jpg',
+                    message: "From fighting for the TV remote to fighting for each other—Raksha Bandhan forever!",
+                    signature: "Your Partner-in-Crime"
+                },
+                {
+                    image: 'https://www.drikpanchang.com/images/events/raksha-bandhan/3x/raksha_bandhan.jpg',
+                    message: "May our sacred bond of love and trust grow stronger each passing year. Happy Raksha Bandhan!",
+                    signature: "From Your Dear Sibling"
+                },
+                {
+                    image: 'https://images.stockcake.com/public/0/c/d/0cddd6f0-8741-47b9-af4c-b260621b70bb_medium/cozy-evening-fun-stockcake.jpg',
+                    message: "The love we share is a light that brightens my life. Happy Rakhi to the best sibling!",
+                    signature: "With Love"
+                },
+                {
+                    image: 'https://www.shutterstock.com/image-vector/raksha-bandhan-rakhi-festival-background-260nw-2325335609.jpg',
+                    message: "No matter where life takes us, you’ll always be in my heart. Happy Raksha Bandhan!",
+                    signature: "Your Biggest Fan"
+                }
+            ];
+
+            // --- DOM Elements ---
+            const gallery = document.getElementById('photo-gallery');
+            const modal = document.getElementById('photo-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalPhotoPreview = document.getElementById('modal-photo-preview');
+
+            // --- 1. Dynamic Photo Generation ---
+            photoData.forEach((photo, index) => {
+                const photoWrapper = document.createElement('div');
+                photoWrapper.classList.add('photo-card-wrapper');
+                photoWrapper.dataset.index = index;
+                photoWrapper.innerHTML = `
+                    <div class="photo-card">
+                        <div class="photo-image-container">
+                            <img class="photo-image" src="${photo.image}" alt="Sibling Photo">
+                        </div>
+                        <div class="photo-content">
+                            <p class="photo-message">${photo.message}</p>
+                            <p class="photo-signature">${photo.signature}</p>
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(photoWrapper);
+            });
+
+            // --- 2. Intersection Observer for Card Animations ---
+            const photoWrappers = document.querySelectorAll('.photo-card-wrapper');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        const message = entry.target.querySelector('.photo-message');
+                        const signature = entry.target.querySelector('.photo-signature');
+                        
+                        message.style.opacity = 1;
+                        signature.style.opacity = 1;
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            photoWrappers.forEach(wrapper => {
+                observer.observe(wrapper);
+            });
+
+            // --- 3. Modal Logic ---
+            gallery.addEventListener('click', (e) => {
+                const photoCardWrapper = e.target.closest('.photo-card-wrapper');
+                if (photoCardWrapper) {
+                    const index = photoCardWrapper.dataset.index;
+                    const photo = photoData[index];
+                    
+                    modalPhotoPreview.src = photo.image;
+                    
+                    modal.classList.add('open');
+                }
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.remove('open');
+            });
+            
+            // --- Canvas-based Particle Effect ---
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let particles = [];
+            let mouse = { x: null, y: null };
+            window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+            class Particle {
+                constructor(x, y, size, color) {
+                    this.x = x; this.y = y; this.size = size; this.color = color;
+                    this.speedX = Math.random() * 0.5 - 0.25;
+                    this.speedY = Math.random() * 0.5 - 0.25;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                }
+                update() {
+                    this.x += this.speedX; this.y += this.speedY;
+                    const dx = this.x - mouse.x; const dy = this.y - mouse.y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const maxDistance = 100;
+                    const force = (maxDistance - distance) / maxDistance;
+                    if (force > 0) {
+                        this.x += forceDirectionX * force * 5; this.y += forceDirectionY * force * 5;
+                    }
+                    if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                    if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                    this.draw();
+                }
+            }
+            function initParticles() {
+                particles = [];
+                const numberOfParticles = 300;
+                const colors = ['#ffd700', '#e0f2f1', '#ffffff'];
+                for (let i = 0; i < numberOfParticles; i++) {
+                    const size = Math.random() * 3 + 1;
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particles.push(new Particle(x, y, size, color));
+                }
+            }
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) { particles[i].update(); }
+                requestAnimationFrame(animateParticles);
+            }
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
+            });
+            initParticles();
+            animateParticles();
+        });
+    </script>
+</body>
+</html>

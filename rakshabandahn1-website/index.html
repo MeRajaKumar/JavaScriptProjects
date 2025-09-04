@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raksha Bandhan - A Grand Celebration</title>
+    <meta name="description" content="Celebrate the unbreakable bond of a brother and sister with this creative and aesthetic web page, filled with animations and elegant design.">
+    <meta name="keywords" content="Raksha Bandhan, Rakhi, siblings, festival, wishes, Indian culture, aesthetic, animation, premium">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* CSS Variables for a Sophisticated Palette */
+        :root {
+            --primary-color: #4b0082;      /* Deep Indigo */
+            --secondary-color: #6a0572;    /* Muted Rose-Purple */
+            --accent-color: #ffc0cb;       /* Soft Pink */
+            --gold-color: #ffd700;         /* Gold for accents */
+            --text-color: #e0e0e0;         /* Light Grey Text */
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --neon-glow: 0 0 8px var(--gold-color), 0 0 15px var(--gold-color);
+            --box-glow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 25px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Base and Global Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden; /* No scrolling */
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            position: relative;
+        }
+
+        /* --- Animated Background Canvas --- */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place behind everything */
+            opacity: 0.8;
+        }
+
+        /* --- Hero Section - Main Container --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- Main Content Box - Glassmorphism with Glow --- */
+        .main-content-box {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: clamp(2.5rem, 5vw, 5rem);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.5s ease-out;
+            transition: all 0.5s ease-in-out;
+        }
+        .main-content-box::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 27px;
+            background: linear-gradient(45deg, #f06, #0ff, #f06);
+            background-size: 400% 400%;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(20px);
+            animation: glowing-border 20s linear infinite;
+        }
+        @keyframes glowing-border {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        /* --- Text Styling --- */
+        h1.main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--gold-color);
+            text-shadow: var(--neon-glow);
+            margin-bottom: 0.5rem;
+            animation: neonGlow 2s ease-in-out infinite alternate;
+        }
+        .sub-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .greeting-text {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+        
+        /* --- CTA Button with Aurora Effect --- */
+        .cta-button {
+            position: relative;
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 1.2rem 3rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            z-index: 100;
+        }
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--gold-color);
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #ff00cc);
+            background-size: 300% 300%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            filter: blur(15px);
+            z-index: -1;
+            animation: aurora 5s infinite linear;
+        }
+        .cta-button:hover::before { opacity: 1; }
+        @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Floating Emojis --- */
+        .floating-emoji {
+            position: absolute;
+            font-size: clamp(2rem, 5vw, 4rem);
+            animation: float 25s infinite ease-in-out;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .floating-emoji:hover {
+            transform: scale(1.2) rotate(15deg);
+            text-shadow: 0 0 15px var(--accent-color);
+        }
+
+        /* Specific positions for emojis */
+        .emoji-star { top: 10%; left: 15%; animation-duration: 25s; }
+        .emoji-heart { bottom: 5%; left: 30%; animation-duration: 30s; animation-delay: 5s; }
+        .emoji-flower { top: 20%; right: 10%; animation-duration: 22s; animation-delay: 2s; }
+        .emoji-gift { bottom: 20%; right: 25%; animation-duration: 28s; animation-delay: 8s; }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2vw, -2vh) rotate(15deg); }
+            50% { transform: translate(0, -4vh) rotate(-15deg); }
+            75% { transform: translate(-2vw, -2vh) rotate(15deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* --- Video Section Styles --- */
+        #video-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        #video-container.visible { opacity: 1; display: flex; }
+
+        #video-player {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        #next-button {
+            position: absolute;
+            bottom: 30px; right: 30px;
+            background-color: var(--accent-color);
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+        }
+        #next-button.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        #next-button:hover {
+            transform: scale(1.1);
+            background-color: #ff69b4;
+        }
+
+        /* Basic Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes neonGlow {
+            0% { text-shadow: var(--neon-glow); }
+            100% { text-shadow: 0 0 12px var(--gold-color), 0 0 20px var(--gold-color); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero-section" id="main-content">
+        <canvas id="particle-canvas"></canvas>
+
+        <div class="floating-emoji emoji-star">✨</div>
+        <div class="floating-emoji emoji-heart">💖</div>
+        <div class="floating-emoji emoji-flower">🌸</div>
+        <div class="floating-emoji emoji-gift">🎁</div>
+
+        <div class="main-content-box">
+            <h1 class="main-title">Raksha Bandhan Greetings!</h1>
+            <p class="sub-heading">A sacred and unbreakable bond of siblings</p>
+            <p class="greeting-text">
+                This day celebrates the sweet memories of our childhood, the promise to stand by each other through thick and thin, and the unbreakable thread of love and trust.
+            </p>
+            <button class="cta-button" onclick="showVideo()">NEXT >>></button>
+        </div>
+    </section>
+
+    <div id="video-container">
+        <video id="video-player" src="rb.mp4" loop muted playsinline></video>
+        <button id="next-button" onclick="window.location.href='card.html';">Next Page</button>
+    </div>
+
+    <script>
+        // --- Canvas-based Particle Effect ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Particle {
+            constructor(x, y, size, color) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const distance = Math.sqrt(dx*dx + dy*dy);
+                const forceDirectionX = dx / distance;
+                const forceDirectionY = dy / distance;
+                const maxDistance = 100;
+                const force = (maxDistance - distance) / maxDistance;
+                if (force > 0) {
+                    this.x += forceDirectionX * force * 5;
+                    this.y += forceDirectionY * force * 5;
+                }
+
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const numberOfParticles = 250;
+            const colors = ['#ffc0cb', '#ffd700', '#e0e0e0'];
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = Math.random() * 3 + 1;
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particles.push(new Particle(x, y, size, color));
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+        
+        initParticles();
+        animateParticles();
+
+        // --- Video and Button Logic ---
+        const videoContainer = document.getElementById('video-container');
+        const videoPlayer = document.getElementById('video-player');
+        const nextButton = document.getElementById('next-button');
+
+        function showVideo() {
+            // Hide main content
+            document.getElementById('main-content').style.display = 'none';
+            // Show video container with fade-in effect
+            videoContainer.classList.add('visible');
+            videoPlayer.play();
+
+            // Show 'Next' button after 3 seconds
+            setTimeout(() => {
+                nextButton.classList.add('visible');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

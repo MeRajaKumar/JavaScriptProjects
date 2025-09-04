@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitne Dosti-Lover Ho Tum? 💖</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        /* * ----------------------------------------
+        * Global Variables & Reset
+        * ----------------------------------------
+        */
+        :root {
+            --bg-gradient-start: #fbc2eb;
+            --bg-gradient-end: #a6c1ee;
+            --main-text-color: #333;
+            --accent-color-1: #ff6b6b; /* Rose-red */
+            --accent-color-2: #ffd166; /* Sunny-yellow */
+            --accent-color-3: #a6c1ee; /* Sky-blue */
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: rgba(0, 0, 0, 0.15);
+            --button-color: #fff;
+            --font-main: 'Poppins', sans-serif;
+            --font-heading: 'Pacifico', cursive;
+            --font-quiz: 'Nunito', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--main-text-color);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+            padding: 50px 20px;
+        }
+
+        /* * ----------------------------------------
+        * Background & Particles (Consistent with other pages)
+        * ----------------------------------------
+        */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 10% 20%, #ffefd5, transparent 50%),
+                        radial-gradient(circle at 90% 80%, #d1c1f5, transparent 50%);
+            transition: background 1s ease-in-out;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 25s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 25%; width: 50px; height: 50px; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 50%; left: 60%; width: 30px; height: 30px; animation-delay: 4s; }
+        .particle:nth-child(3) { bottom: 10%; left: 80%; width: 40px; height: 40px; animation-delay: 8s; }
+        .particle:nth-child(4) { top: 80%; left: 40%; width: 60px; height: 60px; animation-delay: 12s; }
+        .particle:nth-child(5) { top: 40%; left: 10%; width: 45px; height: 45px; animation-delay: 16s; }
+        .particle:nth-child(6) { bottom: 30%; left: 5%; width: 35px; height: 35px; animation-delay: 20s; }
+        .particle:nth-child(7) { top: 60%; right: 5%; width: 55px; height: 55px; animation-delay: 2s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-50px) rotate(180deg); opacity: 0.6; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+        }
+
+        /* * ----------------------------------------
+        * Loading Screen
+        * ----------------------------------------
+        */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fade-out 2.5s forwards;
+            animation-delay: 2s;
+        }
+
+        @keyframes fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        #loading-text {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--main-text-color);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            animation: text-pop-up 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+        @keyframes text-pop-up {
+            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .emoji-rain {
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            height: 120%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: drift 5s linear infinite;
+        }
+        @keyframes drift {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+        }
+        .emoji-rain .emoji:nth-child(1) { left: 10%; animation-duration: 4s; animation-delay: 1s; }
+        .emoji-rain .emoji:nth-child(2) { left: 30%; animation-duration: 6s; animation-delay: 2s; }
+        .emoji-rain .emoji:nth-child(3) { left: 50%; animation-duration: 5s; animation-delay: 0.5s; }
+        .emoji-rain .emoji:nth-child(4) { left: 70%; animation-duration: 7s; animation-delay: 3s; }
+        .emoji-rain .emoji:nth-child(5) { left: 90%; animation-duration: 4.5s; animation-delay: 1.5s; }
+        .emoji-rain .emoji:nth-child(6) { left: 20%; animation-duration: 5.5s; animation-delay: 2.5s; }
+        .emoji-rain .emoji:nth-child(7) { left: 85%; animation-duration: 6.5s; animation-delay: 3.5s; }
+
+        /* * ----------------------------------------
+        * Main Quiz Container
+        * ----------------------------------------
+        */
+        #quiz-container, #result-container {
+            background: var(--card-bg);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px var(--card-shadow), 0 0 80px rgba(255, 255, 255, 0.5) inset;
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: popup 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 2.5s;
+        }
+
+        #quiz-container:hover, #result-container:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 100px rgba(255, 255, 255, 0.8) inset;
+        }
+
+        @keyframes popup {
+            0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            animation: progress-glow 1.5s infinite alternate;
+        }
+        @keyframes progress-glow {
+            from { box-shadow: 0 0 5px var(--accent-color-1); }
+            to { box-shadow: 0 0 15px var(--accent-color-2); }
+        }
+
+        .question {
+            font-family: var(--font-quiz);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-color-3);
+            margin-bottom: 30px;
+            transition: all 0.5s ease;
+        }
+
+        /* * ----------------------------------------
+        * Options Grid
+        * ----------------------------------------
+        */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-quiz);
+            font-weight: 700;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .option.selected {
+            border-color: var(--accent-color-1);
+            background: rgba(255, 107, 107, 0.2);
+            animation: pulse-border 1s forwards;
+        }
+        @keyframes pulse-border {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        /* * ----------------------------------------
+        * Result Screen
+        * ----------------------------------------
+        */
+        #result-container {
+            display: none;
+        }
+
+        #result-heading {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--accent-color-1);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            animation: textPopUp 1s forwards;
+        }
+
+        #result-text {
+            font-family: var(--font-main);
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* * ----------------------------------------
+        * Next Page Button
+        * ----------------------------------------
+        */
+        .next-page-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-color-3), #5c81d1);
+            color: var(--button-color);
+            font-family: var(--font-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            margin-top: 50px;
+            box-shadow: 0 8px 25px rgba(166, 193, 238, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1;
+        }
+
+        .next-page-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(166, 193, 238, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            #loading-text { font-size: 2rem; }
+            #quiz-container, #result-container { padding: 40px 20px; }
+            .question { font-size: 1.5rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .option { padding: 15px; }
+            #result-heading { font-size: 2.5rem; }
+            #result-text { font-size: 1.1rem; }
+            .next-page-btn { padding: 15px 30px; font-size: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div id="loading-screen">
+        <h2 id="loading-text" class="animate__animated animate__zoomIn"></h2>
+        <div class="emoji-rain">
+            <div class="emoji">💛</div>
+            <div class="emoji">😘</div>
+            <div class="emoji">🫶</div>
+            <div class="emoji">😂</div>
+            <div class="emoji">💖</div>
+            <div class="emoji">🥳</div>
+            <div class="emoji">💫</div>
+        </div>
+    </div>
+    
+    <div id="quiz-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+        <div id="question-container"></div>
+    </div>
+
+    <div id="result-container">
+        <h2 id="result-heading"></h2>
+        <p id="result-text"></p>
+        <a href="certificate.html" class="next-page-btn">Claim Your Certificate 🏆</a>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+    </script>
+    
+    <script>
+        // Quiz Data with more detailed options and questions
+        const quizData = [
+            {
+                question: "Tumhara dosti emoji?",
+                options: ["😂 - Hassi ka dost", "💖 - Dil se dost", "✨ - Shining star", "🫶 - Always together"],
+                correctAnswer: "💖 - Dil se dost" 
+            },
+            {
+                question: "Jab call karte ho, to baat kya hoti hai?",
+                options: ["Problem solving 🧠", "Gossip & memes 🤪", "Life plans & dreams 💫", "Chup rehna pasand hai 🤫"],
+                correctAnswer: "Gossip & memes 🤪"
+            },
+            {
+                question: "Ek mushkil situation mein, tum kya karte ho?",
+                options: ["Pehle sunte ho, fir solution dete ho 🤔", "Pehle ghabraate ho, fir haste ho 😂", "Turant help karne pahunch jaate ho 🫂", "‘Sab theek ho jayega’ bolkar motivate karte ho 💪"],
+                correctAnswer: "Turant help karne pahunch jaate ho 🫂"
+            },
+            {
+                question: "Tumhari dosti ko ek film title do:",
+                options: ["Andaz Apna Apna 😆", "Zindagi Na Milegi Dobara 🥳", "Sholay 🤝", "Yeh Jawaani Hai Deewani 🚀"],
+                correctAnswer: "Zindagi Na Milegi Dobara 🥳"
+            },
+            {
+                question: "Hamesha yaad rehne wala moment?",
+                options: ["College ka last day 🎓", "Wo trip, jahan hum kho gaye the! 🗺️", "Jab ek-dusre ko surprise diya 🎁", "Ek baar jab humne milke plan banaya tha, jo kabhi pura nahi hua 😂"],
+                correctAnswer: "Wo trip, jahan hum kho gaye the! 🗺️"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const questionContainer = document.getElementById('question-container');
+        const progressBar = document.getElementById('progress-bar');
+        const totalQuestions = quizData.length;
+
+        // Loading screen animation logic
+        const loadingText = "Quiz Loading... Friendship Frequencies Calibrated! ✨";
+        const loadingTextElement = document.getElementById('loading-text');
+        let loadingIndex = 0;
+
+        function typeLoadingText() {
+            if (loadingIndex < loadingText.length) {
+                loadingTextElement.innerHTML += loadingText.charAt(loadingIndex);
+                loadingIndex++;
+                setTimeout(typeLoadingText, 50);
+            }
+        }
+        typeLoadingText();
+
+        setTimeout(() => {
+            document.getElementById('loading-screen').style.opacity = '0';
+            document.getElementById('loading-screen').style.visibility = 'hidden';
+            document.getElementById('quiz-container').style.opacity = '1';
+            document.getElementById('quiz-container').style.transform = 'scale(1)';
+            loadQuestion();
+            AOS.refresh();
+        }, 3000);
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= totalQuestions) {
+                setTimeout(showResult, 800);
+                return;
+            }
+
+            const questionData = quizData[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question" data-aos="fade-down" data-aos-duration="800">${questionData.question}</div>
+                <div class="options-grid">
+                    ${questionData.options.map((option, index) => `
+                        <button class="option" onclick="selectAnswer('${option.replace(/'/g, "\\'")}')" data-aos="zoom-in" data-aos-delay="${index * 100}">
+                            ${option}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progress = (currentQuestionIndex) / totalQuestions * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function selectAnswer(answer) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            event.target.classList.add('selected');
+
+            if (answer === quizData[currentQuestionIndex].correctAnswer) {
+                score++;
+            }
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                questionContainer.classList.add('animate__animated', 'animate__fadeOutUp');
+                setTimeout(() => {
+                    questionContainer.classList.remove('animate__animated', 'animate__fadeOutUp');
+                    loadQuestion();
+                    if (currentQuestionIndex < totalQuestions) {
+                         questionContainer.classList.add('animate__animated', 'animate__fadeInDown');
+                    }
+                    AOS.refresh();
+                }, 500);
+            }, 800);
+        }
+
+        function showResult() {
+            const quizContainer = document.getElementById('quiz-container');
+            const resultContainer = document.getElementById('result-container');
+            
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+
+            let resultHeading, resultText;
+            if (score === 5) {
+                resultHeading = "You are the Ultimate Dosti Lover! 👑";
+                resultText = "Tumhari dosti sach mein anmol hai! Tumne sabhi sawalon ka sahi jawab diya. Tumhari dosti ka koi mol nahi! 🏆";
+            } else if (score >= 3) {
+                resultHeading = "You are a Great Friend! ❤️";
+                resultText = "Tumhari dosti pakki hai! Kuch sawalon ka jawab galat tha, par dil se tum hamesha saath ho. Aise hi bane raho! 🥰";
+            } else {
+                resultHeading = "You are a Good Friend! 😊";
+                resultText = "Tumhara dil achha hai, par shayad kuch memories dhundhli ho gayi hain. Chalo, aur memories banate hain! ✨";
+            }
+
+            document.getElementById('result-heading').textContent = resultHeading;
+            document.getElementById('result-text').textContent = resultText;
+            
+            AOS.refresh();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Book For Your Birthday ❤️</title>
+<!-- Favicon for browser tab -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+
+<!-- Android Chrome icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+
+<!-- Apple Touch Icon (iPhone/iPad homescreen) -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="site.webmanifest">
+
+    <link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      :root {
+          --color-pink-bg: #feecea;
+          --color-white: #fff;
+          --color-off-white: #fffafc;
+          --color-black: #333;
+          --color-text-pink: #ff7882;
+          --color-heart: #f43d67;
+          --font-title: 'Titan One', sans-serif;
+          --font-heading: 'Sriracha', sans-serif;
+          --font-handwriting: 'Zeyada', cursive;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+        perspective: 2200px;
+        font: 1em/1.4 var(--font-body);
+        overflow: hidden;
+        color: var(--color-black);
+        background-color: var(--color-pink-bg);
+        background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent);
+        background-size: 80px 80px;
+      }
+
+      .book {
+        position: relative;
+        margin: auto;
+        width: 45vmin;
+        height: 60vmin;
+        transform-style: preserve-3d;
+        transform: rotateX(10deg);
+        transition: transform 1s ease-in-out;
+      }
+
+      .page {
+        position: absolute;
+        inset: 0;
+        pointer-events: all;
+        user-select: none;
+        transform-style: preserve-3d;
+        transform-origin: left center;
+        transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), z-index 0s 0.6s;
+        box-shadow: 0em 0.5em 1.5em -0.2em rgba(0,0,0,0.3);
+        border-radius: 0.25em 1em 1em 0.25em;
+      }
+      
+      .front, .back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        overflow: hidden;
+        background-color: var(--color-off-white);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
+        text-align: center;
+      }
+      .front { border-radius: 0.25em 1em 1em 0.25em; }
+      .back { border-radius: 1em 0.25em 0.25em 1em; transform: rotateY(180deg); }
+      
+      .book { counter-reset: page 0; }
+      .front::after, .back::after {
+        position: absolute;
+        bottom: 1em;
+        counter-increment: page;
+        content: counter(page);
+        font-size: 0.9em;
+        font-family: var(--font-heading);
+        color: #ccc;
+      }
+      .front::after { right: 1em; }
+      .back::after { left: 1em; }
+      .cover::after, .back-cover::after { content: ""; }
+      
+      .front:has(img), .back:has(img) { padding: 0; }
+      .front img, .back img { width: 100%; height: 100%; object-fit: cover; }
+
+      .cover {
+        background: linear-gradient(135deg, var(--color-heart), var(--color-text-pink));
+        color: var(--color-white);
+        border: 2px solid rgba(255,255,255,0.5);
+      }
+      .cover h1 {
+        font-family: var(--font-title);
+        font-size: clamp(2.5em, 5vw, 3.5em);
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+      }
+      .cover p {
+        font-family: var(--font-heading);
+        font-size: 1.2em;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+      }
+
+      h2 {
+        font-family: var(--font-heading);
+        font-size: clamp(1.5em, 3vw, 2em);
+        color: var(--color-text-pink);
+        margin-bottom: 0.5em;
+      }
+      p {
+        font-family: var(--font-handwriting);
+        font-size: clamp(1.4em, 2.5vw, 1.8em);
+        margin-bottom: 0.8em;
+        line-height: 1.4;
+        color: var(--color-black);
+      }
+      p:last-child { margin-bottom: 0; }
+      b { font-family: var(--font-heading); font-weight: bold; }
+
+      .floating-hearts {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: -1;
+      }
+      @keyframes float {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 0.8; }
+        100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+      }
+      .floating-hearts i {
+        position: absolute;
+        bottom: -80px;
+        color: var(--color-heart);
+        animation: float linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+ <!-- Floating hearts animation -->
+<div class="floating-hearts"></div>
+
+<!-- Main Book Container -->
+<div class="book">
+
+   <!-- Page 0: Cover Page -->
+<div class="page" data-page-num="0">
+    <div class="front cover">
+        <h1>Happy Birthday!</h1>
+        <p>A Special Book Just for You ❤️</p>
+    </div>
+    <div class="back">
+        <h2>A Wish For You... ✨</h2>
+        <p>On your special day, I wish you a life full of happiness and all your beautiful dreams coming true.</p>
+    </div>
+</div>
+
+<!-- Page 1: Warm Start -->
+<div class="page" data-page-num="1">
+    <div class="front">
+       <img src="2.png" alt="">
+    </div>
+    <div class="back">
+        <h2>For the Birthday Girl 💖</h2>
+        <p>May your birthday be as sweet and beautiful as you are.  
+        Always remember how special you truly are.</p>
+    </div>
+</div>
+
+<!-- Page 2: Calm Compliment -->
+<div class="page" data-page-num="2">
+    <div class="front">
+       <img src="3.png" alt="">
+    </div>
+    <div class="back">
+        <h2>You’re the Best 🥺</h2>
+        <p>So calm, so real, and always kind.  
+        Never ever change — you’re amazing as you are.</p>
+    </div>
+</div>
+
+<!-- Page 3: Special Feel -->
+<div class="page" data-page-num="3">
+    <div class="front">
+       <img src="4.png" alt="">
+    </div>
+    <div class="back">
+        <h2>You’re Truly Special ✨</h2>
+        <p>Not everyone has such a good heart.  
+        It’s honestly a blessing to know someone like you.  
+        Have a great birthday, yaar!</p>
+    </div>
+</div>
+
+<!-- Page 4: Wishes for the Future -->
+<div class="page" data-page-num="4">
+    <div class="front">
+       <img src="5.png" alt="">
+    </div>
+    <div class="back">
+        <h2>My Wish for You 💖</h2>
+        <p>Hope you reach 10k followers this year —  
+        and keep growing with all the love you truly deserve!</p>
+    </div>
+</div>
+
+<!-- Page 5: Emotional Note -->
+<div class="page" data-page-num="5">
+    <div class="front">
+       <img src="6.png" alt="">
+    </div>
+    <div class="back">
+        <h2>Before You Go... 💫</h2>
+        <p>I really wish this year brings you the same joy  
+        you give to everyone around you.  
+        You deserve it, truly.</p>
+    </div>
+</div>
+
+<!-- Page 6: Fun + Friendship Vibe -->
+<div class="page" data-page-num="6">
+    <div class="front">
+       <img src="profile.jpg" alt="">
+    </div>
+    <div class="back">
+        <h2>Bas kar yaar 🥲</h2>
+        <p>Mujhe roz block karne ki dhamki mat diya kar... 😭😭😭</p>
+    </div>
+</div>
+
+<!-- Page 7: Heartfelt Goodbye -->
+<div class="page" data-page-num="7">
+    <div class="front">
+       <img src="1.png" alt="">
+    </div>
+    <div class="back back-cover cover">
+        <h1>With Love</h1>
+        <p>Always and Forever 💌</p>
+    </div>
+</div>
+
+    <script>
+        const book = document.querySelector('.book');
+        const pages = Array.from(document.querySelectorAll('.page'));
+        const pageCount = pages.length;
+        let currentPage = 0;
+
+        book.addEventListener('click', function(e) {
+            if (e.target.closest('a')) return;
+            
+            const rect = book.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+
+            if (clickX < rect.width / 2) {
+                currentPage = Math.max(0, currentPage - 1);
+            } else {
+                currentPage = Math.min(pageCount, currentPage + 1);
+            }
+            updateBook();
+        });
+
+        function updateBook() {
+            const isBookOpen = currentPage > 0 && currentPage < pageCount;
+            const bookTransform = isBookOpen ? `translateX(50%) rotateX(10deg)` : `rotateX(10deg)`;
+            book.style.transform = bookTransform;
+            
+            pages.forEach((page) => {
+                const pageNum = parseInt(page.dataset.pageNum, 10);
+                const isFlipped = pageNum < currentPage;
+                
+                page.style.transform = `rotateY(${isFlipped ? -180 : 0}deg)`;
+                // **THE FIX IS HERE:** This new z-index logic is more robust.
+                // It ensures flipped pages are always behind the current pages.
+                page.style.zIndex = isFlipped ? pageNum : pageCount - pageNum;
+            });
+        }
+        
+        updateBook();
+
+        const createFloatingHearts = (container, count) => {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fa-solid fa-heart';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 10}s`;
+                heart.style.fontSize = `${15 + Math.random() * 20}px`;
+                heart.style.animationDuration = `${10 + Math.random() * 15}s`;
+                container.appendChild(heart);
+            }
+        };
+        createFloatingHearts(document.querySelector('.floating-hearts'), 30);
+    </script>
+  </body>
+</html>

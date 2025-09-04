@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Friendship Trophy 👑</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
+    <style>
+        /* * ----------------------------------------
+        * Global Variables & Reset
+        * ----------------------------------------
+        */
+        :root {
+            --bg-gradient-start: #fbc2eb;
+            --bg-gradient-end: #a6c1ee;
+            --main-text-color: #333;
+            --accent-color-1: #ff6b6b; /* Rose-red */
+            --accent-color-2: #ffd166; /* Sunny-yellow */
+            --accent-color-3: #a6c1ee; /* Sky-blue */
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: rgba(0, 0, 0, 0.15);
+            --button-color: #fff;
+            --font-main: 'Poppins', sans-serif;
+            --font-heading: 'Pacifico', cursive;
+            --font-certificate: 'Great Vibes', cursive;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            color: var(--main-text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+            padding: 50px 20px;
+        }
+
+        /* * ----------------------------------------
+        * Background & Particles (Consistent)
+        * ----------------------------------------
+        */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 25s infinite ease-in-out;
+            pointer-events: none;
+        }
+        .particle:nth-child(1) { top: 20%; left: 25%; width: 50px; height: 50px; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 50%; left: 60%; width: 30px; height: 30px; animation-delay: 4s; }
+        .particle:nth-child(3) { bottom: 10%; left: 80%; width: 40px; height: 40px; animation-delay: 8s; }
+        .particle:nth-child(4) { top: 80%; left: 40%; width: 60px; height: 60px; animation-delay: 12s; }
+        .particle:nth-child(5) { top: 40%; left: 10%; width: 45px; height: 45px; animation-delay: 16s; }
+        .particle:nth-child(6) { bottom: 30%; left: 5%; width: 35px; height: 35px; animation-delay: 20s; }
+        .particle:nth-child(7) { top: 60%; right: 5%; width: 55px; height: 55px; animation-delay: 2s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-50px) rotate(180deg); opacity: 0.6; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+        }
+
+        /* * ----------------------------------------
+        * Floating Doodles
+        * ----------------------------------------
+        */
+        .floating-doodle {
+            position: fixed;
+            font-size: 3rem;
+            animation: float-doodle 20s infinite ease-in-out;
+            opacity: 0.7;
+            z-index: 1;
+            pointer-events: none;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.2));
+        }
+        @keyframes float-doodle {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, -150px) scale(1.2); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .doodle-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .doodle-2 { top: 30%; right: 15%; animation-delay: 3s; }
+        .doodle-3 { bottom: 20%; left: 25%; animation-delay: 6s; }
+        .doodle-4 { bottom: 10%; right: 5%; animation-delay: 9s; }
+        .doodle-5 { top: 60%; left: 45%; animation-delay: 4s; }
+        .doodle-6 { top: 80%; right: 30%; animation-delay: 12s; }
+
+        /* * ----------------------------------------
+        * Main Content Container
+        * ----------------------------------------
+        */
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* * ----------------------------------------
+        * Welcome & Name Input Section
+        * ----------------------------------------
+        */
+        .welcome-section {
+            margin-bottom: 50px;
+            animation: fadeIn 1.5s forwards;
+            animation-delay: 0.5s;
+        }
+        
+        .welcome-heading {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--accent-color-1);
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .welcome-subtext {
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 1.5s;
+        }
+
+        .name-input-card {
+            background: var(--card-bg);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 15px 40px var(--card-shadow), 0 0 80px rgba(255, 255, 255, 0.5) inset;
+            max-width: 500px;
+            margin: 0 auto 50px;
+            animation: popup 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 2s;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.5s ease;
+        }
+        .name-input-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 100px rgba(255, 255, 255, 0.8) inset;
+        }
+
+        .name-input-card h3 {
+            font-family: var(--font-main);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .name-input {
+            width: 80%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-family: var(--font-main);
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .name-input:focus {
+            outline: none;
+            border-color: var(--accent-color-2);
+            box-shadow: 0 0 10px var(--accent-color-2);
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            color: var(--button-color);
+            font-family: var(--font-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        /* * ----------------------------------------
+        * Certificate Display Section
+        * ----------------------------------------
+        */
+        #certificate-display {
+            display: none;
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px var(--card-shadow), 0 0 80px rgba(255, 255, 255, 0.5) inset;
+            border: 5px solid var(--accent-color-2);
+            padding: 50px;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: flipIn 1s forwards;
+            animation-delay: 0.5s;
+            transition: all 0.5s ease;
+            max-width: 900px;
+            width: 100%;
+        }
+        #certificate-display:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 100px rgba(255, 255, 255, 0.8) inset;
+        }
+        
+        @keyframes flipIn {
+            from { opacity: 0; transform: scale(0.8) rotateY(180deg); }
+            to { opacity: 1; transform: scale(1) rotateY(0deg); }
+        }
+
+        .certificate-ribbon {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .certificate-ribbon::after {
+            content: '👑';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            animation: pulse-emoji 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulse-emoji {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        .certificate-content {
+            margin-top: 50px;
+        }
+
+        .certificate-content h2 {
+            font-family: var(--font-main);
+            font-size: 1.8rem;
+            color: var(--main-text-color);
+            font-weight: 300;
+        }
+        
+        .certificate-content h1 {
+            font-family: var(--font-certificate);
+            font-size: 4.5rem;
+            color: var(--accent-color-1);
+            margin: 10px 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .certificate-content p {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .certificate-signature {
+            margin-top: 40px;
+            font-family: var(--font-main);
+            font-weight: 700;
+            color: #795548;
+            font-size: 1rem;
+        }
+
+        /* * ----------------------------------------
+        * Download Button
+        * ----------------------------------------
+        */
+        #download-btn-container {
+            margin-top: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, var(--accent-color-3), #5c81d1);
+            color: var(--button-color);
+            font-family: var(--font-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(166, 193, 238, 0.4);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(166, 193, 238, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-heading { font-size: 2.5rem; }
+            .name-input-card { padding: 30px; }
+            .certificate-content h1 { font-size: 3rem; }
+            .certificate-content h2 { font-size: 1.5rem; }
+            .download-btn { padding: 15px 30px; font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .certificate-content h1 { font-size: 2.5rem; }
+        }
+        
+        /* A new class to temporarily remove animations for screenshot */
+        .for-download-only {
+            animation: none !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="floating-doodle doodle-1">❤️</div>
+    <div class="floating-doodle doodle-2">✨</div>
+    <div class="floating-doodle doodle-3">💫</div>
+    <div class="floating-doodle doodle-4">🫶</div>
+    <div class="floating-doodle doodle-5">💖</div>
+    <div class="floating-doodle doodle-6">🥳</div>
+
+    <div class="container">
+        
+        <div class="welcome-section" data-aos="fade-down" data-aos-duration="1000">
+            <h1 class="welcome-heading">Your Friendship Trophy 👑</h1>
+            <p class="welcome-subtext">Because some people aren’t just friends… they’re feelings you never want to lose.</p>
+        </div>
+
+        <div id="input-card-wrapper" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000">
+            <div class="name-input-card">
+                <h3>Enter Your Name, Dost 👑</h3>
+                <input type="text" id="dost-name" class="name-input" placeholder="What's your legendary title?">
+                <button class="generate-btn" onclick="generateCertificate()">Generate My Certificate</button>
+            </div>
+        </div>
+
+        <div id="download-certificate">
+            <div id="certificate-display">
+                <div class="certificate-ribbon"></div>
+                <div class="certificate-content">
+                    <h2>This certifies that</h2>
+                    <h1 id="certificate-name"></h1>
+                    <p>is officially the Most Precious Friend <br> of the Year!</p>
+                    <div class="certificate-signature">
+                        <p>Signed by: Shobhit Asthana</p>
+                        <p>— The Creator of Feelings™</p>
+                    </div>
+                </div>
+            </div>
+            <div id="download-btn-container">
+                <button class="download-btn" onclick="downloadCertificate()">🎁 Download Your Trophy of Friendship</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // AOS initialization
+        AOS.init({ once: true, duration: 1000 });
+
+        // Placeholder animation
+        const input = document.getElementById('dost-name');
+        const placeholders = ["Enter your name, dost...", "What's your legendary title?", "Write it like a signature 🖋️"];
+        let placeholderIndex = 0;
+        
+        function updatePlaceholder() {
+            let currentPlaceholder = placeholders[placeholderIndex];
+            let currentText = '';
+            let charIndex = 0;
+            const typingInterval = setInterval(() => {
+                currentText += currentPlaceholder.charAt(charIndex);
+                input.placeholder = currentText;
+                charIndex++;
+                if (charIndex === currentPlaceholder.length) {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        input.placeholder = '';
+                        setTimeout(() => {
+                            placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+                            updatePlaceholder();
+                        }, 500);
+                    }, 1000);
+                }
+            }, 80);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.refresh();
+            // The input card is now visible by default, so we can start the placeholder animation right away.
+            setTimeout(() => {
+                updatePlaceholder();
+            }, 3000);
+        });
+
+        function generateCertificate() {
+            const name = document.getElementById('dost-name').value;
+            if (name) {
+                document.getElementById('certificate-name').textContent = name;
+                document.getElementById('input-card-wrapper').style.display = 'none';
+                
+                const certificateDisplay = document.getElementById('certificate-display');
+                certificateDisplay.style.display = 'block';
+                document.getElementById('download-btn-container').style.display = 'block';
+
+                certificateDisplay.style.animation = 'none';
+                void certificateDisplay.offsetWidth;
+                certificateDisplay.style.animation = 'flipIn 1s forwards';
+            } else {
+                alert("Please enter a name first!");
+            }
+        }
+
+        function downloadCertificate() {
+            const certificateContainer = document.getElementById('certificate-display');
+            const downloadBtnContainer = document.getElementById('download-btn-container');
+
+            // 1. Hide the download button before taking the screenshot
+            downloadBtnContainer.style.display = 'none';
+            
+            // 2. Temporarily inject a background into the element for a clean screenshot
+            // and remove animations
+            certificateContainer.style.transform = 'none';
+            certificateContainer.style.animation = 'none';
+            certificateContainer.style.boxShadow = 'none';
+
+            // 3. Capture the screenshot using html2canvas
+            html2canvas(certificateContainer, { 
+                scale: 2, 
+                backgroundColor: null,
+                useCORS: true // This is important for external images/fonts
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                
+                const name = document.getElementById('dost-name').value || 'Friend';
+                link.download = `Friendship_Certificate_${name}.png`;
+                
+                link.click();
+
+                // 4. Restore original state after download
+                downloadBtnContainer.style.display = 'block';
+                certificateContainer.style.animation = 'flipIn 1s forwards'; // Restore animation
+                certificateContainer.style.transform = 'scale(1)'; // Restore transform for hover
+                certificateContainer.style.boxShadow = '0 15px 40px var(--card-shadow), 0 0 80px rgba(255, 255, 255, 0.5) inset';
+            });
+        }
+    </script>
+</body>
+</html>

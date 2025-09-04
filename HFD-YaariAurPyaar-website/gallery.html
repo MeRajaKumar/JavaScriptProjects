@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery of Giggly Moments 📸</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;800&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        /* * ----------------------------------------
+        * Global Variables & Reset
+        * ----------------------------------------
+        */
+        :root {
+            --bg-gradient-start: #ffb6c1; /* Light Pink */
+            --bg-gradient-end: #b0e0e6;   /* Powder Blue */
+            --main-text-color: #333;
+            --accent-color-1: #e91e63; /* Pink */
+            --accent-color-2: #ff9800; /* Orange */
+            --accent-color-3: #2196f3; /* Blue */
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-shadow: rgba(0, 0, 0, 0.15);
+            --button-color: #fff;
+            --font-main: 'Poppins', sans-serif;
+            --font-heading: 'Pacifico', cursive;
+            --font-caption: 'Shadows Into Light', cursive;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--main-text-color);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+            padding: 50px 20px;
+        }
+
+        /* * ----------------------------------------
+        * Advanced Background & Particles
+        * ----------------------------------------
+        */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.2), transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.2), transparent 50%);
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 25s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 25%; width: 50px; height: 50px; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 50%; left: 60%; width: 30px; height: 30px; animation-delay: 4s; }
+        .particle:nth-child(3) { bottom: 10%; left: 80%; width: 40px; height: 40px; animation-delay: 8s; }
+        .particle:nth-child(4) { top: 80%; left: 40%; width: 60px; height: 60px; animation-delay: 12s; }
+        .particle:nth-child(5) { top: 40%; left: 10%; width: 45px; height: 45px; animation-delay: 16s; }
+        .particle:nth-child(6) { bottom: 30%; left: 5%; width: 35px; height: 35px; animation-delay: 20s; }
+        .particle:nth-child(7) { top: 60%; right: 5%; width: 55px; height: 55px; animation-delay: 2s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-50px) rotate(180deg); opacity: 0.6; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+        }
+
+        /* Parallax effect on hover */
+        .background-parallax {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateZ(0);
+            transition: transform 0.3s ease-out;
+        }
+
+        /* * ----------------------------------------
+        * Floating Emojis / Doodles
+        * ----------------------------------------
+        */
+        .floating-doodle {
+            position: fixed;
+            font-size: 3rem;
+            animation: float-doodle 20s infinite ease-in-out;
+            opacity: 0.6;
+            z-index: 1;
+            pointer-events: none;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.2));
+        }
+        @keyframes float-doodle {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, -150px) scale(1.2); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .doodle-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .doodle-2 { top: 30%; right: 15%; animation-delay: 3s; }
+        .doodle-3 { bottom: 20%; left: 25%; animation-delay: 6s; }
+
+        /* * ----------------------------------------
+        * Main Content Container
+        * ----------------------------------------
+        */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            color: var(--accent-color-1);
+            text-shadow: 4px 4px 0px rgba(255, 255, 255, 0.5), 6px 6px 0px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            animation: textPopUp 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+        @keyframes textPopUp {
+            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* * ----------------------------------------
+        * Modern Image Grid
+        * ----------------------------------------
+        */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .image-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .image-card:hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 250px; /* Consistent height for a neat grid */
+            object-fit: cover;
+            display: block;
+            border-radius: 20px 20px 0 0;
+            transition: transform 0.4s ease;
+        }
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-card .caption {
+            font-family: var(--font-caption);
+            padding: 15px;
+            font-size: 1.5rem;
+            line-height: 1.4;
+            color: #555;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .image-card:hover .caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* * ----------------------------------------
+        * Interactive Buttons
+        * ----------------------------------------
+        */
+        .button-group {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .shuffle-btn, .next-btn {
+            font-family: var(--font-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: relative;
+            overflow: hidden;
+            color: var(--button-color);
+            text-decoration: none;
+        }
+
+        .shuffle-btn {
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+        }
+
+        .next-btn {
+            background: linear-gradient(45deg, var(--accent-color-3), #5c81d1);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+        }
+
+        .shuffle-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(233, 30, 99, 0.6);
+        }
+
+        .next-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(33, 150, 243, 0.6);
+        }
+
+        /* * ----------------------------------------
+        * Responsive Design
+        * ----------------------------------------
+        */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.8rem; }
+            .image-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .image-card img { height: 200px; }
+            .image-card .caption { font-size: 1.2rem; }
+            .shuffle-btn, .next-btn { padding: 15px 25px; font-size: 1rem; }
+            .button-group { flex-direction: column; gap: 15px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    <div class="background-parallax"></div>
+
+    <div class="floating-doodle doodle-1">🤍</div>
+    <div class="floating-doodle doodle-2">✨</div>
+    <div class="floating-doodle doodle-3">⭐</div>
+    <div class="floating-doodle" style="top: 80%; right: 10%; animation-delay: 9s;">💖</div>
+    <div class="floating-doodle" style="top: 50%; left: 30%; animation-delay: 4s;">🎉</div>
+
+    <div class="container">
+        <h1 class="main-title" data-aos="fade-down" data-aos-duration="1000">Gallery of Giggly Moments 📸</h1>
+
+        <div class="button-group">
+            <button class="shuffle-btn" onclick="shuffleCards()">Feeling Nostalgic? Shuffle! 💫</button>
+        </div>
+        
+        <div class="image-grid" id="image-grid">
+            <div class="image-card" data-aos="zoom-in" data-aos-delay="100">
+                <img src="https://m.media-amazon.com/images/I/715bc6KOR2L._UF350,350_QL50_.jpg" alt="Friends having a picnic">
+                <div class="caption">
+                    “Woh trip yaad hai? Sabse best trip thi!”
+                </div>
+            </div>
+
+            <div class="image-card" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://i.pinimg.com/236x/d7/8a/e1/d78ae10a3cea11da4ffc68030b5c8d88.jpg" alt="Friends taking a selfie">
+                <div class="caption">
+                    “Group photo, but tu sabse alag chamakta hai 😎✨”
+                </div>
+            </div>
+
+            <div class="image-card" data-aos="zoom-in" data-aos-delay="300">
+                <img src="https://i.pinimg.com/originals/5e/53/d4/5e53d407c2b51b48f7e4a73fc7037d84.jpg" alt="Friends laughing together">
+                <div class="caption">
+                    “Tu nahi hota toh life boring ho jaati 😪”
+                </div>
+            </div>
+
+            <div class="image-card" data-aos="zoom-in" data-aos-delay="400">
+                <img src="https://i.pinimg.com/236x/63/de/5f/63de5fd134fc22bced1be0949ac289fe.jpg" alt="Friends walking on a beach">
+                <div class="caption">
+                    “Har musibat mein tu saath tha! ❤️”
+                </div>
+            </div>
+
+            <div class="image-card" data-aos="zoom-in" data-aos-delay="500">
+                <img src="https://i.pinimg.com/236x/f8/ce/4c/f8ce4c98d6bcde062c1e11462a558583.jpg" alt="Friends having a picnic">
+                <div class="caption">
+                    “Tere saath har pal jaise ek naya adventure tha!”
+                </div>
+            </div>
+
+            <div class="image-card" data-aos="zoom-in" data-aos-delay="600">
+                <img src="https://i.pinimg.com/236x/d7/a5/e2/d7a5e2463e4edd15a3c7fab5a55a8a87.jpg" alt="Another great memory">
+                <div class="caption">
+                    “Yaad hai wo din jab humne milke woh problem solve ki thi!🧠”
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="button-group">
+            <a href="message.html" class="next-btn">Next → Message 💌</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+    </script>
+    
+    <script>
+        function shuffleCards() {
+            const grid = document.getElementById('image-grid');
+            const cards = Array.from(grid.children);
+            
+            // Animate cards out
+            cards.forEach((card, index) => {
+                card.style.animation = `bounceOut 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards`;
+                card.style.animationDelay = `${index * 0.05}s`;
+            });
+
+            // Reorder cards after animation
+            setTimeout(() => {
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [cards[i], cards[j]] = [cards[j], cards[i]];
+                }
+                cards.forEach(card => grid.appendChild(card));
+                AOS.refresh(); // Refresh AOS to trigger new animations
+
+                // Animate cards back in with different effect
+                cards.forEach((card, index) => {
+                    card.style.animation = `flipInY 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards`;
+                    card.style.animationDelay = `${index * 0.08}s`;
+                });
+
+            }, 700); // Wait for bounceOut animation to finish
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes flipInY {
+                0% { transform: perspective(400px) rotateY(90deg) scale(0.8); opacity: 0; }
+                100% { transform: perspective(400px) rotateY(0deg) scale(1); opacity: 1; }
+            }
+            @keyframes bounceOut {
+                0% { transform: scale(1); opacity: 1; }
+                100% { transform: scale(0.3) translateY(50px) opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        document.addEventListener('mousemove', (e) => {
+            const parallaxLayer = document.querySelector('.background-parallax');
+            if (parallaxLayer) {
+                const speed = 0.05;
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                parallaxLayer.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

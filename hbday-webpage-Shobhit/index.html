@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Portal: Just for You! 🎂💖</title>
+    <!-- Favicon for browser tab -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+
+<!-- Android Chrome icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+
+<!-- Apple Touch Icon (iPhone/iPad homescreen) -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="site.webmanifest">
+
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Sriracha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== CSS Variables for Theme ===== */
+        :root {
+            --color-pink-bg: #feecea;
+            --color-white: #fff;
+            --color-black: #333;
+            --color-text-pink: #ff7882;
+            --color-heart: #f43d67;
+            --font-title: 'Titan One', sans-serif;
+            --font-body: 'Sriracha', sans-serif;
+        }
+
+        /* ===== Global Styles ===== */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: var(--font-body);
+            overflow: hidden;
+            position: relative;
+            /* Applying the pink grid background */
+            background-color: var(--color-pink-bg);
+            background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent);
+            background-size: 80px 80px;
+        }
+        
+        /* ===== Floating Hearts Animation ===== */
+        .floating-hearts {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        .floating-hearts i {
+            position: absolute;
+            bottom: -80px;
+            color: var(--color-text-pink);
+            animation: float-up linear infinite;
+            opacity: 0;
+        }
+
+        /* ===== Login Form Container ===== */
+        #login-form {
+            background: linear-gradient(145deg, var(--color-text-pink), var(--color-heart));
+            padding: 40px 60px;
+            border-radius: 50% 50% 10% 10%; /* Keeping original heart shape */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            position: relative;
+            z-index: 10;
+            opacity: 0;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        #login-form.active {
+            opacity: 1;
+        }
+
+        /* Form Heading */
+        h2 {
+            font-family: var(--font-title);
+            color: var(--color-white);
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+
+        /* Form Label */
+        label {
+            font-size: 1.2rem;
+            color: var(--color-white);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* ===== NEW: Input Box Styling ===== */
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(0,0,0,0.1); /* Softer border */
+            font-size: 1.2rem;
+            font-family: var(--font-body);
+            text-align: center;
+            background: #fff0f2; /* Soft pink background */
+            color: var(--color-black);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #c5a9b0;
+        }
+
+        input:focus {
+            outline: none;
+            background: white; /* Turn white on focus */
+            border-color: var(--color-heart);
+            box-shadow: 0 0 15px rgba(244, 61, 103, 0.5);
+        }
+
+        /* Submit Button */
+        button {
+            background: var(--color-white);
+            color: var(--color-heart);
+            border: 3px solid var(--color-black);
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-family: var(--font-body);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: var(--color-heart);
+            color: var(--color-white);
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--color-white);
+            font-weight: bold;
+            height: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="floating-hearts"></div>
+
+    
+
+    <form id="login-form">
+       <h2>🎉 A Birthday Surprise Just for You! 🎂</h2>
+
+<label for="code">Hey birthday girl/Boy, <br>can you type your beautiful name below?</label>
+
+<input type="text" id="code" name="code" placeholder="Type your name here...">
+
+<button id="submit-btn">Tap to Unlock Your Surprise ❤️</button>
+
+<div id="result"></div>
+
+    </form>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const codeInput = document.getElementById('code');
+        const resultDiv = document.getElementById('result');
+
+        const secretCode = 'Shobhit'; // The correct name
+        const nextPageUrl = 'home.html'; // The page to go to on success
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userInput = codeInput.value.trim();
+
+            if (userInput.toLowerCase() === secretCode.toLowerCase()) {
+                resultDiv.textContent = 'Welcome, Birthday Girl/Boy!';
+                form.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+                form.style.transform = "scale(1.1)";
+                form.style.opacity = "0";
+                setTimeout(() => {
+                    window.location.href = nextPageUrl;
+                }, 500);
+            } else {
+                resultDiv.textContent = 'Oops! That\'s not the right name.';
+                form.animate([
+                    { transform: 'translateX(0px)' }, { transform: 'translateX(-10px)' },
+                    { transform: 'translateX(10px)' }, { transform: 'translateX(-10px)' },
+                    { transform: 'translateX(10px)' }, { transform: 'translateX(0px)' }
+                ], {
+                    duration: 500,
+                    iterations: 1
+                });
+            }
+        });
+
+        // Fade in form on page load
+        window.onload = () => {
+            setTimeout(() => {
+                form.classList.add('active');
+            }, 200);
+        };
+        
+        // --- Generate Floating Hearts ---
+        const createFloatingHearts = (container, count) => {
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fa-solid fa-heart';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 10}s`;
+                heart.style.fontSize = `${15 + Math.random() * 20}px`;
+                heart.style.animationDuration = `${15 + Math.random() * 15}s`;
+                container.appendChild(heart);
+            }
+        };
+
+        createFloatingHearts(document.querySelector('.floating-hearts'), 30);
+    </script>
+</body>
+</html>

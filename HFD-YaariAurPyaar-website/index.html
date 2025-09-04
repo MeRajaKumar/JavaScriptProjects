@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Special One - Happy Friendship Day 💛</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,300;0,400;0,600;0,800;1,300&display=swap" rel="stylesheet">
+    <style>
+        /*
+        * ----------------------------------------
+        * Global Variables & Reset
+        * ----------------------------------------
+        */
+        :root {
+            --bg-gradient-start: #fbc2eb;
+            --bg-gradient-end: #a6c1ee;
+            --main-text-color: #333;
+            --accent-color-1: #ff6b6b; /* Rose-red */
+            --accent-color-2: #ffd166; /* Sunny-yellow */
+            --accent-color-3: #a6c1ee; /* Sky-blue */
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: rgba(0, 0, 0, 0.15);
+            --button-color: #fff;
+            --font-main: 'Poppins', sans-serif;
+            --font-secondary: 'Pacifico', cursive;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--main-text-color);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /*
+        * ----------------------------------------
+        * Advanced Background & Particles
+        * ----------------------------------------
+        */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 10% 20%, #ffefd5, transparent 50%),
+                        radial-gradient(circle at 90% 80%, #d1c1f5, transparent 50%);
+            transition: background 1s ease-in-out;
+        }
+
+        .background-animation::before,
+        .background-animation::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: moveGradient 20s infinite alternate ease-in-out;
+        }
+
+        .background-animation::before {
+            width: 250px;
+            height: 250px;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .background-animation::after {
+            width: 300px;
+            height: 300px;
+            bottom: 15%;
+            right: 20%;
+            animation-delay: 5s;
+        }
+
+        @keyframes moveGradient {
+            from { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            to { transform: translate(50px, -50px) scale(1.2); opacity: 0.6; }
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 25s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 25%; width: 50px; height: 50px; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 50%; left: 60%; width: 30px; height: 30px; animation-delay: 4s; }
+        .particle:nth-child(3) { bottom: 10%; left: 80%; width: 40px; height: 40px; animation-delay: 8s; }
+        .particle:nth-child(4) { top: 80%; left: 40%; width: 60px; height: 60px; animation-delay: 12s; }
+        .particle:nth-child(5) { top: 40%; left: 10%; width: 45px; height: 45px; animation-delay: 16s; }
+        .particle:nth-child(6) { bottom: 30%; left: 5%; width: 35px; height: 35px; animation-delay: 20s; }
+        .particle:nth-child(7) { top: 60%; right: 5%; width: 55px; height: 55px; animation-delay: 2s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-50px) rotate(180deg); opacity: 0.6; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+        }
+
+        /*
+        * ----------------------------------------
+        * Floating Emojis
+        * ----------------------------------------
+        */
+        .floating-emoji {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.9;
+            animation: floatEmoji 15s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.2));
+        }
+
+        .floating-emoji:hover {
+            transform: scale(1.5) rotate(10deg);
+        }
+
+        .floating-emoji:nth-child(2) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-emoji:nth-child(3) { top: 20%; right: 15%; animation-delay: 2s; }
+        .floating-emoji:nth-child(4) { bottom: 25%; left: 20%; animation-delay: 4s; }
+        .floating-emoji:nth-child(5) { bottom: 15%; right: 25%; animation-delay: 6s; }
+        .floating-emoji:nth-child(6) { top: 40%; left: 35%; animation-delay: 8s; }
+        .floating-emoji:nth-child(7) { top: 50%; right: 40%; animation-delay: 3s; }
+        .floating-emoji:nth-child(8) { bottom: 5%; left: 45%; animation-delay: 7s; }
+
+        @keyframes floatEmoji {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /*
+        * ----------------------------------------
+        * Main Container & Pop-up Effect
+        * ----------------------------------------
+        */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .card {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 50px 60px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 40px var(--card-shadow), 0 0 80px rgba(255, 255, 255, 0.5) inset;
+            max-width: 80%;
+            transform: scale(0.9);
+            animation: popup 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 0 100px rgba(255, 255, 255, 0.8) inset;
+        }
+
+        @keyframes popup {
+            0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /*
+        * ----------------------------------------
+        * Typography & Titles
+        * ----------------------------------------
+        */
+        h1 {
+            font-family: var(--font-secondary);
+            font-size: 3.8rem;
+            color: var(--accent-color-1);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            position: relative;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            animation: textFadeIn 1.5s ease-out forwards;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin: 0;
+            color: var(--main-text-color);
+            opacity: 0;
+            animation: textFadeIn 2s ease-out 0.5s forwards;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /*
+        * ----------------------------------------
+        * Button & Hover Effects
+        * ----------------------------------------
+        */
+        .button-group {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--button-color);
+            background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            opacity: 0;
+            animation: buttonFadeIn 1s ease-out 1s forwards;
+        }
+
+        .button.secondary {
+            background: linear-gradient(45deg, var(--accent-color-3), var(--accent-color-1));
+            box-shadow: 0 8px 25px rgba(166, 193, 238, 0.4);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 150%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: transform 0.5s ease-out;
+            z-index: -1;
+        }
+
+        .button:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .button.secondary:hover {
+            box-shadow: 0 12px 30px rgba(166, 193, 238, 0.6);
+        }
+
+        .button:hover::before {
+            transform: rotate(45deg) translate(200%, -200%);
+        }
+
+        @keyframes buttonFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /*
+        * ----------------------------------------
+        * Responsive Design
+        * ----------------------------------------
+        */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            .subtitle { font-size: 1rem; }
+            .button { padding: 15px 30px; font-size: 1.1rem; }
+            .card { padding: 40px 30px; max-width: 95%; }
+            .button-group { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="floating-emoji">❤️</div>
+    <div class="floating-emoji">✨</div>
+    <div class="floating-emoji">😊</div>
+    <div class="floating-emoji">💛</div>
+    <div class="floating-emoji">💖</div>
+    <div class="floating-emoji">💫</div>
+    <div class="floating-emoji">🤗</div>
+    <div class="floating-emoji">💌</div>
+
+    <main class="main-container">
+        <section class="hero-section" id="hero">
+            <div class="card">
+                <h1>To My Special One</h1>
+                <p class="subtitle">A Journey to all our Best Memories</p>
+                <div class="button-group">
+                    <a href="memories.html" class="button">Enter The Journey 🚀</a>
+                    <a href="gallery.html" class="button secondary">See The Gallery 🖼️</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
